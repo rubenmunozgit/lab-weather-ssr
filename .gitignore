@@ -1,0 +1,11 @@
+# Dependency directory
+node_modules
+
+# Compiled code
+build
+
+# .env variable
+.env
+
+# OSX
+.DS_Store
