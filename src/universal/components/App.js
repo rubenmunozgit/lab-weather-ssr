@@ -1,6 +1,9 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import Card from 'react-bootstrap/Card'
+import Card from 'react-bootstrap/Card';
+import sunrise from './sunrise.svg';
+import sunset from './sunset.svg';
+import mappin from './map-pin.svg';
 
 const App = (props) => {
   const { ip, geoInfo, weather } = props.initialState;
@@ -13,8 +16,9 @@ const App = (props) => {
       <Row className="justify-content-center">
         <Col xs={12} sm={10} md={10} lg={10}>
           <Card>
-            <Card.Header className="bg-success text-white pr-30 pl-10">
-              <span>{city}, {country}</span>
+            <Card.Header className="bg-success text-white pr-30 pl-10 d-flex justify-content-start">
+              <img className="inline" src={mappin}/>
+              <div className="inline ml-2">{city}, {country}</div>
             </Card.Header>
             <Card.Body>
               <Row>
@@ -35,8 +39,8 @@ const App = (props) => {
                   <p>humity</p>
                 </Col>
                 <Col xs={12} sm={6} className="d-flex justify-content-between">
-                  <p>sunrise</p>
-                  <p>sunset</p>
+                  <img className="inline" src={sunrise}/>
+                  <img className="inline" src={sunset}/>
                 </Col>
               </Row>
             </Card.Body>

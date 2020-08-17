@@ -6,11 +6,25 @@ var browserConfig = {
   entry: './src/universal/index.js',
   output: {
     path: path.join(__dirname, 'build', 'static', 'js'),
-    filename: 'bundle.js',
-    publicPath: '/',
+    filename: '[name].bundle.js',
+    publicPath: '/'
   },
   module: {
-    rules: [{ test: /\.(js)$/, exclude: /node_modules/, use: 'babel-loader' }],
+    rules: [
+      { test: /\.(js)$/, 
+        exclude: /node_modules/, 
+        use: 'babel-loader'
+      },
+      {
+        test: /\.svg$/, 
+        loader: 'url-loader',
+        options: {
+          name: '[name].[hash].[ext]',
+          outputPath: '../svg',
+          limit: 10000
+        }
+      }
+    ]
   },
   //mode: 'production',
   plugins: [
@@ -31,7 +45,21 @@ var serverConfig = {
   },
   //mode: 'production',
   module: {
-    rules: [{ test: /\.(js)$/, use: 'babel-loader' }],
+    rules: [
+      { 
+        test: /\.(js)$/, 
+        use: 'babel-loader' 
+      },
+      {
+        test: /\.svg$/, 
+        loader: 'url-loader',
+        options: {
+          name: '[name].[hash].[ext]',
+          outputPath: 'static/svg',
+          limit: 10000
+        }
+      }
+    ],
   },
   plugins: [
     new webpack.DefinePlugin({
