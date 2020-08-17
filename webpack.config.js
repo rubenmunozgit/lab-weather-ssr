@@ -19,8 +19,6 @@ var browserConfig = {
         test: /\.svg$/, 
         loader: 'url-loader',
         options: {
-          name: '[name].[hash].[ext]',
-          outputPath: '../svg',
           limit: 10000
         }
       }
@@ -54,8 +52,6 @@ var serverConfig = {
         test: /\.svg$/, 
         loader: 'url-loader',
         options: {
-          name: '[name].[hash].[ext]',
-          outputPath: 'static/svg',
           limit: 10000
         }
       }
