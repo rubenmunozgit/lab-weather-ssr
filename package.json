@@ -7,7 +7,7 @@
     "build": "webpack --mode=production",
     "build:dev": "webpack --mode=development --watch",
     "start": "NODE_ENV=production npm run build && node ./build/server.js",
-    "start:dev": "concurrently \"npm run build:dev\" \"nodemon ./build/server.js\" ",
+    "start:dev": "concurrently \"npm run build:dev\" \"nodemon --delay 2.5 ./build/server.js\" ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -45,7 +45,7 @@
     "babel-loader": "^8.1.0",
     "concurrently": "^5.2.0",
     "css-loader": "^4.1.1",
-    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.3.0",
     "nodemon": "^2.0.4",
     "style-loader": "^1.2.1",
     "url-loader": "^4.1.0",
