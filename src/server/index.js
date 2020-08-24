@@ -7,9 +7,9 @@ import errorHandler from './errorHandler'
 const port = process.env.PORT || 3000;
 const app = express();
 
-app.engine('handlebars', exphbs({ layoutsDir: './src/views' }));
-app.set('views', './src/views');
-app.set('view engine', 'handlebars');
+app.engine('.hbs', exphbs({ extname: '.hbs' }));
+app.set('views', './build/views');
+app.set('view engine', '.hbs');
 app.set('trust proxy', true);
 
 app.use('/', router);

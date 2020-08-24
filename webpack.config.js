@@ -1,13 +1,14 @@
-var path = require('path');
-var webpack = require('webpack');
-var nodeExternals = require('webpack-node-externals');
+const path = require('path');
+const webpack = require('webpack');
+const nodeExternals = require('webpack-node-externals');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const devMode = process.env.NODE_ENV !== "production";
 
 var browserConfig = {
   entry: './src/universal/index.js',
   output: {
-    path: path.join(__dirname, 'build', 'static', 'js'),
-    filename: '[name].bundle.js',
-    publicPath: '/'
+    path: path.join(__dirname, 'build', 'static'),
+    filename: '[name].bundle.js'
   },
   module: {
     rules: [
@@ -28,6 +29,23 @@ var browserConfig = {
   plugins: [
     new webpack.DefinePlugin({
       __isBrowser__: 'true',
+    }),
+    new HtmlWebpackPlugin({
+      filename: '../views/404.hbs',
+      template: path.resolve(__dirname, 'src', 'views', '404.handlebars'),
+      excludeChunks: [ 'main' ]
+    }),
+    new HtmlWebpackPlugin({
+      filename: '../views/main.hbs',
+      template: path.resolve(__dirname, 'src', 'views', 'main.handlebars'),
+      minify: devMode ? false : {
+        collapseWhitespace: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        useShortDoctype: true
+      }
     }),
   ],
 };
