@@ -10,6 +10,22 @@ var browserConfig = {
     path: path.join(__dirname, 'build', 'static'),
     filename: '[name].bundle.js'
   },
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      chunks: 'all',
+      minSize: 0,
+      maxSize: devMode ? 0 : 1000 * 100,
+      cacheGroups: {
+        vendor: {
+          name: 'vendor',
+          test: /[\\/]node_modules[\\/].*\.js$/,
+          enforce: true,
+          reuseExistingChunk: true,
+        },
+      },
+    },
+  },
   module: {
     rules: [
       { test: /\.(js)$/, 
