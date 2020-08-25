@@ -5,10 +5,28 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const devMode = process.env.NODE_ENV !== "production";
 
 var browserConfig = {
-  entry: './src/universal/index.js',
+  entry: {
+    main: './src/universal/index.js',
+  },
   output: {
     path: path.join(__dirname, 'build', 'static'),
     filename: '[name].bundle.js'
+  },
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      chunks: 'all',
+      minSize: 0,
+      maxSize: devMode ? 0 : 1000 * 100,
+      cacheGroups: {
+        vendor: {
+          name: 'vendor',
+          test: /[\\/]node_modules[\\/].*\.js$/,
+          enforce: true,
+          reuseExistingChunk: true,
+        },
+      },
+    },
   },
   module: {
     rules: [
