@@ -2,29 +2,11 @@ const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const devMode = process.env.NODE_ENV !== "production";
 
-var browserConfig = {
+var commBrowserConfig = {
   entry: './src/universal/index.js',
   output: {
     path: path.join(__dirname, 'build', 'static'),
-    filename: '[name].bundle.js'
-  },
-  optimization: {
-    runtimeChunk: 'single',
-    splitChunks: {
-      chunks: 'all',
-      minSize: 0,
-      maxSize: devMode ? 0 : 1000 * 100,
-      cacheGroups: {
-        vendor: {
-          name: 'vendor',
-          test: /[\\/]node_modules[\\/].*\.js$/,
-          enforce: true,
-          reuseExistingChunk: true,
-        },
-      },
-    },
   },
   module: {
     rules: [
@@ -41,7 +23,21 @@ var browserConfig = {
       }
     ]
   },
-  //mode: 'production',
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      chunks: 'all',
+      minSize: 0,
+      cacheGroups: {
+        vendor: {
+          name: 'vendor',
+          test: /[\\/]node_modules[\\/].*\.js$/,
+          enforce: true,
+          reuseExistingChunk: true,
+        },
+      },
+    },
+  },
   plugins: [
     new webpack.DefinePlugin({
       __isBrowser__: 'true',
@@ -54,19 +50,11 @@ var browserConfig = {
     new HtmlWebpackPlugin({
       filename: '../views/main.hbs',
       template: path.resolve(__dirname, 'src', 'views', 'main.handlebars'),
-      minify: devMode ? false : {
-        collapseWhitespace: true,
-        removeComments: true,
-        removeRedundantAttributes: true,
-        removeScriptTypeAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        useShortDoctype: true
-      }
     }),
   ],
 };
 
-var serverConfig = {
+var commServerConfig = {
   entry: './src/server/index.js',
   target: 'node',
   externals: [nodeExternals()],
@@ -75,7 +63,6 @@ var serverConfig = {
     filename: 'server.js',
     publicPath: '/',
   },
-  //mode: 'production',
   module: {
     rules: [
       { 
@@ -98,4 +85,4 @@ var serverConfig = {
   ],
 };
 
-module.exports = [browserConfig, serverConfig];
+module.exports = {commBrowserConfig, commServerConfig};
