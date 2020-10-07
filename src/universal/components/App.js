@@ -35,7 +35,7 @@ const App = (props) => {
               </Row>
               <Row>
                 <Col xs={12} sm={6} className="d-flex justify-content-between">
-                  <p>wind</p>
+                  <p>{current.wind_speed}</p>
                   <p>humity</p>
                 </Col>
                 <Col xs={12} sm={6} className="d-flex justify-content-between">
