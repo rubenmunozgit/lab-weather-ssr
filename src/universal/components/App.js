@@ -1,4 +1,5 @@
 import React from 'react';
+import './global.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import sunrise from './sunrise.svg';

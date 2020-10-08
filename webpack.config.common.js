@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 var commBrowserConfig = {
   entry: './src/universal/index.js',
@@ -20,6 +21,10 @@ var commBrowserConfig = {
         options: {
           limit: 10000
         }
+      },
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
       }
     ]
   },
@@ -42,6 +47,7 @@ var commBrowserConfig = {
     new webpack.DefinePlugin({
       __isBrowser__: 'true',
     }),
+    new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       filename: '../views/404.hbs',
       template: path.resolve(__dirname, 'src', 'views', '404.handlebars'),
@@ -75,6 +81,10 @@ var commServerConfig = {
         options: {
           limit: 10000
         }
+      },
+      {
+        test: /\.css$/,
+        use: ['css-loader']
       }
     ],
   },
