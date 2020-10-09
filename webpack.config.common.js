@@ -47,7 +47,6 @@ var commBrowserConfig = {
     new webpack.DefinePlugin({
       __isBrowser__: 'true',
     }),
-    new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       filename: '../views/404.hbs',
       template: path.resolve(__dirname, 'src', 'views', '404.handlebars'),
@@ -57,6 +56,7 @@ var commBrowserConfig = {
       filename: '../views/main.hbs',
       template: path.resolve(__dirname, 'src', 'views', 'main.handlebars'),
     }),
+    new MiniCssExtractPlugin()
   ],
 };
 
@@ -84,7 +84,7 @@ var commServerConfig = {
       },
       {
         test: /\.css$/,
-        use: ['css-loader']
+        use: ['null-loader']
       }
     ],
   },

@@ -1,4 +1,5 @@
 import express from 'express';
+import compression from 'compression';
 const exphbs = require('express-handlebars');
 import router from './routes';
 import errorHandler from './errorHandler'
@@ -12,6 +13,7 @@ app.set('views', './build/views');
 app.set('view engine', '.hbs');
 app.set('trust proxy', true);
 
+app.use(compression());
 app.use('/', router);
 app.use(errorHandler);
 app.use(express.static('build'));
