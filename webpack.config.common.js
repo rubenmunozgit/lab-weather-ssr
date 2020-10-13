@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 var commBrowserConfig = {
   entry: './src/universal/index.js',
@@ -46,6 +47,18 @@ var commBrowserConfig = {
   plugins: [
     new webpack.DefinePlugin({
       __isBrowser__: 'true',
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: path.resolve(
+          __dirname, 
+          'node_modules', 
+          'bootstrap', 
+          'dist',
+          'css',
+          'bootstrap.min.css'),
+          to: path.join(__dirname, 'build', 'views', 'partials', 'baseline.hbs') }
+      ],
     }),
     new HtmlWebpackPlugin({
       filename: '../views/404.hbs',

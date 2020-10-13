@@ -22,6 +22,7 @@ const applicationHandler = async (req, res, next) => {
     res.render('main', {
       layout: false,
       body,
+      baseline: 'baseline',
       initialState: JSON.stringify(initialState),
       siteContext: JSON.stringify(siteContext),
     });
