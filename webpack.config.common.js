@@ -3,6 +3,8 @@ const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const CopyPlugin = require('copy-webpack-plugin');
+
 var commBrowserConfig = {
   entry: './src/universal/index.js',
   output: {
@@ -42,6 +44,18 @@ var commBrowserConfig = {
     new webpack.DefinePlugin({
       __isBrowser__: 'true',
     }),
+    new CopyPlugin({
+      patterns: [
+        { from: path.resolve(
+          __dirname, 
+          'node_modules', 
+          'bootstrap', 
+          'dist',
+          'css',
+          'bootstrap.min.css'),
+          to: path.join(__dirname, 'build', 'views', 'partials', 'baseline.hbs') }
+      ],
+    }),
     new HtmlWebpackPlugin({
       filename: '../views/404.hbs',
       template: path.resolve(__dirname, 'src', 'views', '404.handlebars'),
@@ -50,7 +64,7 @@ var commBrowserConfig = {
     new HtmlWebpackPlugin({
       filename: '../views/main.hbs',
       template: path.resolve(__dirname, 'src', 'views', 'main.handlebars'),
-    }),
+    })
   ],
 };
 
@@ -75,6 +89,10 @@ var commServerConfig = {
         options: {
           limit: 10000
         }
+      },
+      {
+        test: /\.css$/,
+        use: ['null-loader']
       }
     ],
   },

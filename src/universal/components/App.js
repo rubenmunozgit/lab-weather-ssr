@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import sunrise from './sunrise.svg';
@@ -12,7 +13,7 @@ const App = (props) => {
   const { icon, description } = current.weather[0];
 
   return (
-    <Container>
+    <Container className="Content">
       <Row className="justify-content-center">
         <Col xs={12} sm={10} md={10} lg={10}>
           <Card>
