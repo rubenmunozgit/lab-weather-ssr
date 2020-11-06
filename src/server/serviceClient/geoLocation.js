@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const getLocationByIp = async (ip) => {
-  const url = `https://ipgeolocation.com/${ip}?json=1`;
+  const url = `http://ip-api.com/json/${ip}`// `https://ipgeolocation.com/${ip}?json=1`;
   try {
     const { data } = await axios.get(url);
     return { geoInfo: data};
