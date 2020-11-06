@@ -12,7 +12,7 @@ const applicationHandler = async (req, res, next) => {
     const initialState = {
       ip: req.ip,
       geoInfo,
-      weather,
+      weather
     };
 
     const siteContext = { context: 'AppContext' };

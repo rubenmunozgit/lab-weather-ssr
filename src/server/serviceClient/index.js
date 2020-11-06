@@ -16,8 +16,11 @@ const getGeoWeather = async (ip) => {
       return { error: geoError };
     }
 
-    const { weather, weathError } = await getWeather(
+    /* const { weather, weathError } = await getWeather(
       extractLatLon(geoInfo.coords)
+    ); */
+    const { weather, weathError } = await getWeather(
+      { lat: geoInfo.lat, lon: geoInfo.lon }
     );
     if (weathError) {
       return { error: weathError };
