@@ -1,6 +1,7 @@
 import React from 'react';
 import App from '../../universal/components/App';
 import getGeoWeather from '../serviceClient';
+import { transform2metrics } from '../../utils/metrics';
 import { renderToString } from 'react-dom/server';
 
 const applicationHandler = async (req, res, next) => {
@@ -9,10 +10,14 @@ const applicationHandler = async (req, res, next) => {
     if (error) {
       throw Error(JSON.stringify(error));
     }
+    const { current, daily, } = transform2metrics(weather);
     const initialState = {
       ip: req.ip,
       geoInfo,
-      weather
+      weather: {
+        current,
+        daily
+      }
     };
 
     const siteContext = { context: 'AppContext' };
