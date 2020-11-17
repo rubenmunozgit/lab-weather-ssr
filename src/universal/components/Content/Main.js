@@ -5,6 +5,7 @@ import './Main.css';
 import sunrise from '../Icons/sunrise.svg';
 import sunset from '../Icons/sunset.svg';
 import mappin from '../Icons/map-pin.svg';
+import Daily from './Daily';
 
 const Main = ({city, country, current, daily}) => {
 
@@ -13,7 +14,7 @@ const Main = ({city, country, current, daily}) => {
     return (
     <Container fluid="md" className="Main">
       <Row className="justify-content-center">
-        <Col xs={12} sm={12} md={10} lg={10}>
+        <Col>
           <Card>
             <Card.Header className="bg-success text-white pr-30 pl-10 d-flex justify-content-start">
               <img className="inline" src={mappin}/>
@@ -44,6 +45,11 @@ const Main = ({city, country, current, daily}) => {
               </Row>
             </Card.Body>
           </Card>
+        </Col>
+      </Row>
+      <Row className="justify-content-center">
+        <Col>
+          <Daily daily={daily}/>
         </Col>
       </Row>
     </Container>

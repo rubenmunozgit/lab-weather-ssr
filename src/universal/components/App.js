@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import Main from './Content/Main';
-import Header from './Content/Header';
-import { transform2imperial } from '../../utils/metrics';
+import Header from './Header/Header';
+import { transformC2F, transformF2C } from '../../utils/metrics';
 
 const App = (props) => {
   const {
@@ -10,18 +10,24 @@ const App = (props) => {
     weather
   } = props.initialState;
 
-  const [metric, setMetric] = useState(true);
-  const {current, daily} = metric ? weather : transform2imperial(weather);
 
   const handleSwitchChange = (value) => {
     const metricValue = !value.target.checked;
     setMetric((metric) => (metric = metricValue));
+    if(!metricValue) {
+      SetWeather(weatherData => transformC2F(weatherData));
+    } else {
+      SetWeather(weatherData => transformF2C(weatherData));
+    }
   };
+
+  const [metric, setMetric] = useState(true);
+  const [weatherData, SetWeather] = useState(weather);
 
   return (
     <Fragment>
       <Header {...{ metric, handleSwitchChange }} />
-      <Main {...geoInfo} {...{current, daily}} />
+      <Main {...geoInfo} {...weatherData} />
     </Fragment>
   );
 };
