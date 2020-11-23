@@ -1,18 +1,22 @@
 import React from 'react';
 import App from '../../universal/components/App';
 import getGeoWeather from '../serviceClient';
-import { transformK2C } from '../../utils/metrics';
+import { transformWeather } from '../transforms/weatherTransforms';
 import { renderToString } from 'react-dom/server';
 
 const applicationHandler = async (req, res, next) => {
   try {
+    const locale = req.acceptsLanguages()[0] || 'en-US';
     const { geoInfo, weather, error } = await getGeoWeather(req.ip);
     if (error) {
       throw Error(JSON.stringify(error));
     }
-    const { current, daily, } = transformK2C(weather);
+    const { current, daily } = transformWeather({weather, geoInfo, locale});
     const initialState = {
-      ip: req.ip,
+      sys: {
+        ip: req.ip,
+        locale
+      },
       geoInfo,
       weather: {
         current,
