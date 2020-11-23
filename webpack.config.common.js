@@ -12,18 +12,15 @@ var commBrowserConfig = {
   },
   module: {
     rules: [
-      { test: /\.(js)$/, 
-        exclude: /node_modules/, 
-        use: 'babel-loader'
-      },
+      { test: /\.(js)$/, exclude: /node_modules/, use: 'babel-loader' },
       {
-        test: /\.svg$/, 
+        test: /\.svg$/,
         loader: 'url-loader',
         options: {
-          limit: 10000
-        }
-      }
-    ]
+          limit: 10000,
+        },
+      },
+    ],
   },
   optimization: {
     runtimeChunk: 'single',
@@ -46,25 +43,35 @@ var commBrowserConfig = {
     }),
     new CopyPlugin({
       patterns: [
-        { from: path.resolve(
-          __dirname, 
-          'node_modules', 
-          'bootstrap', 
-          'dist',
-          'css',
-          'bootstrap.min.css'),
-          to: path.join(__dirname, 'build', 'views', 'partials', 'baseline.hbs') }
+        {
+          from: path.resolve(
+            __dirname,
+            'node_modules',
+            'bootstrap',
+            'dist',
+            'css',
+            'bootstrap.min.css'
+          ),
+          to: path.join(
+            __dirname,
+            'build',
+            'views',
+            'partials',
+            'baseline.hbs'
+          ),
+        },
       ],
     }),
     new HtmlWebpackPlugin({
       filename: '../views/404.hbs',
       template: path.resolve(__dirname, 'src', 'views', '404.handlebars'),
-      excludeChunks: [ 'main' ]
+      excludeChunks: ['main'],
     }),
     new HtmlWebpackPlugin({
       filename: '../views/main.hbs',
       template: path.resolve(__dirname, 'src', 'views', 'main.handlebars'),
-    })
+      favicon: path.resolve(__dirname, 'src', 'favicons', 'favicon.ico')
+    }),
   ],
 };
 
@@ -79,21 +86,21 @@ var commServerConfig = {
   },
   module: {
     rules: [
-      { 
-        test: /\.(js)$/, 
-        use: 'babel-loader' 
+      {
+        test: /\.(js)$/,
+        use: 'babel-loader',
       },
       {
-        test: /\.svg$/, 
+        test: /\.svg$/,
         loader: 'url-loader',
         options: {
-          limit: 10000
-        }
+          limit: 10000,
+        },
       },
       {
         test: /\.css$/,
-        use: ['null-loader']
-      }
+        use: ['null-loader'],
+      },
     ],
   },
   plugins: [
@@ -103,4 +110,4 @@ var commServerConfig = {
   ],
 };
 
-module.exports = {commBrowserConfig, commServerConfig};
+module.exports = { commBrowserConfig, commServerConfig };
