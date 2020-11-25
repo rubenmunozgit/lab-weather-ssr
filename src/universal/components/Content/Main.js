@@ -28,7 +28,7 @@ const Main = ({ city, country, current, daily }) => {
         <Col>
           <Card className='mb-4'>
             <Card.Header className='bg-success text-white pr-30 pl-10 d-flex justify-content-start'>
-              <img className='inline' src={mappin} />
+              <img className='inline' src={mappin} width={24} height={24} />
               <div className='inline ml-2'>
                 {city}, {country}
               </div>
@@ -44,6 +44,8 @@ const Main = ({ city, country, current, daily }) => {
                 >
                   <img
                     src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+                    width={100}
+                    height={100}
                   />
                   <h4>
                     <small className='text-muted'>{description}</small>
@@ -68,10 +70,15 @@ const Main = ({ city, country, current, daily }) => {
                 <Col xs={12} sm={6} className='d-flex justify-content-between'>
                   <div className='d-flex align-items-center'>
                     <div className='inline mr-2'>{wind_speed}</div>
-                    <img className='inline' src={wind} />
+                    <img className='inline' src={wind} width={24} height={24} />
                   </div>
                   <div className='d-flex align-items-center'>
-                    <img className='inline' src={droplet} />
+                    <img
+                      className='inline'
+                      src={droplet}
+                      width={24}
+                      height={24}
+                    />
                     <div className='inline ml-2'>{humidity} %</div>
                   </div>
                 </Col>
@@ -81,14 +88,24 @@ const Main = ({ city, country, current, daily }) => {
                   className='d-flex justify-content-between align-items-center'
                 >
                   <div className='inline'>
-                    <img className='inline' src={sunrise} />
+                    <img
+                      className='inline'
+                      src={sunrise}
+                      width={24}
+                      height={24}
+                    />
                     <div className='inline'>{sunrise_local}</div>
                   </div>
                   <div className='inline'>
                     {hrs} hr {mins} mins
                   </div>
                   <div className='inline'>
-                    <img className='inline' src={sunset} />
+                    <img
+                      className='inline'
+                      src={sunset}
+                      width={24}
+                      height={24}
+                    />
                     <div className='inline'>{sunset_local}</div>
                   </div>
                 </Col>

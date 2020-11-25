@@ -11,7 +11,7 @@ const applicationHandler = async (req, res, next) => {
     if (error) {
       throw Error(JSON.stringify(error));
     }
-    const { current, daily } = transformWeather({weather, geoInfo, locale});
+    const { current, daily } = await transformWeather({weather, geoInfo, locale});
     const initialState = {
       sys: {
         ip: req.ip,
@@ -32,6 +32,7 @@ const applicationHandler = async (req, res, next) => {
       layout: false,
       body,
       baseline: 'baseline',
+      locale,
       initialState: JSON.stringify(initialState),
       siteContext: JSON.stringify(siteContext),
     });

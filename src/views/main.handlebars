@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang={{locale}}>
+    <head>
+        <title>SSR my Page</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <style>{{> baseline}}</style>
+    </head>
 
-<head>
-    <title>SSR my Page</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <style>{{> baseline}}</style>
-</head>
-
-<body>
-    <div id='root'>{{{body}}}</div>
-    <script>
-        window.__INITIAL_STATE__ = {{{ initialState }}};
-        window.__SITE_CONTEXT__ = {{{ siteContext }}};
-    </script>
-</body>
+    <body>
+        <div id='root'>{{{body}}}</div>
+        <script>
+            window.__INITIAL_STATE__ = {{{ initialState }}};
+            window.__SITE_CONTEXT__ = {{{ siteContext }}};
+        </script>
+    </body>
 
 </html>
