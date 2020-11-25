@@ -9,6 +9,7 @@ var commBrowserConfig = {
   entry: './src/universal/index.js',
   output: {
     path: path.join(__dirname, 'build', 'static'),
+    publicPath: 'static/'
   },
   module: {
     rules: [
@@ -70,7 +71,7 @@ var commBrowserConfig = {
     new HtmlWebpackPlugin({
       filename: '../views/main.hbs',
       template: path.resolve(__dirname, 'src', 'views', 'main.handlebars'),
-      favicon: path.resolve(__dirname, 'src', 'favicons', 'favicon.ico')
+      favicon: path.resolve(__dirname, 'src', 'favicons', 'favicon.ico'),
     }),
   ],
 };
