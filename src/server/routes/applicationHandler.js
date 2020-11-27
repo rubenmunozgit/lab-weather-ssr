@@ -1,4 +1,6 @@
+import path from 'path';
 import React from 'react';
+import { ChunkExtractor } from '@loadable/server';
 import App from '../../universal/components/App';
 import getGeoWeather from '../serviceClient';
 import { transformWeather } from '../transforms/weatherTransforms';
@@ -26,13 +28,23 @@ const applicationHandler = async (req, res, next) => {
 
     const siteContext = { context: 'AppContext' };
 
-    const body = renderToString(<App initialState={initialState} />);
+    const statsFile = path.resolve('build/static/loadable-stats.json');
+    const extractor = new ChunkExtractor({ statsFile });
+    const jsx = extractor.collectChunks(<App initialState={initialState} />);
+    const scriptTags = extractor.getScriptTags();
+    const linkTags = extractor.getLinkTags();
+    const styleTags = extractor.getStyleTags();
+
+    const body = renderToString(jsx);
 
     res.render('main', {
       layout: false,
       body,
       baseline: 'baseline',
       locale,
+      scriptTags,
+      styleTags,
+      linkTags,
       initialState: JSON.stringify(initialState),
       siteContext: JSON.stringify(siteContext),
     });

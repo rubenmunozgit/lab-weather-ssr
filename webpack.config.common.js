@@ -2,18 +2,21 @@ const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
+const LoadablePlugin = require('@loadable/webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 var commBrowserConfig = {
   entry: './src/universal/index.js',
   output: {
     path: path.join(__dirname, 'build', 'static'),
-    publicPath: 'static/'
+    publicPath: 'static/',
   },
   module: {
     rules: [
-      { test: /\.(js)$/, exclude: /node_modules/, use: 'babel-loader' },
+      { test: /\.(js)$/,
+        exclude: /node_modules/, 
+        use: 'babel-loader' 
+      },
       {
         test: /\.svg$/,
         loader: 'url-loader',
@@ -66,13 +69,16 @@ var commBrowserConfig = {
     new HtmlWebpackPlugin({
       filename: '../views/404.hbs',
       template: path.resolve(__dirname, 'src', 'views', '404.handlebars'),
+      favicon: path.resolve(__dirname, 'src', 'favicons', 'favicon.ico'),
       excludeChunks: ['main'],
     }),
     new HtmlWebpackPlugin({
       filename: '../views/main.hbs',
       template: path.resolve(__dirname, 'src', 'views', 'main.handlebars'),
       favicon: path.resolve(__dirname, 'src', 'favicons', 'favicon.ico'),
+      inject: false // loadadable/server does the inject
     }),
+    new LoadablePlugin(),
   ],
 };
 
@@ -89,6 +95,7 @@ var commServerConfig = {
     rules: [
       {
         test: /\.(js)$/,
+        exclude: /node_modules/,
         use: 'babel-loader',
       },
       {
