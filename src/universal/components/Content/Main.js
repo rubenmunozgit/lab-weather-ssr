@@ -8,14 +8,14 @@ import sunset from '../Icons/sunset.svg';
 import mappin from '../Icons/map-pin.svg';
 import wind from '../Icons/wind.svg';
 import droplet from '../Icons/droplet.svg';
-import getIcon from '../../../utils/weatherIcons';
 import Daily from './Daily';
 
 const Main = ({ city, country, current, daily }) => {
-  const { icon, description } = current.weather[0];
+  const { description } = current.weather[0];
   const {
     feels_like,
     humidity,
+    icon,
     sunset_local,
     sunrise_local,
     temp,
@@ -45,7 +45,7 @@ const Main = ({ city, country, current, daily }) => {
                   className='d-flex flex-column justify-content-around align-items-center'
                 >
                   <img
-                    src={getIcon(icon)}
+                    src={`/static/icons/${icon}`}
                     width={100}
                     height={100}
                   />

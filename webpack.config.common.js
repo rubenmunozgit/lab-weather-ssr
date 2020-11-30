@@ -63,6 +63,25 @@ var commBrowserConfig = {
         },
       ],
     }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(
+            __dirname,
+            'src',
+            'universal',
+            'components',
+            'Icons'
+          ),
+          to: path.join(
+            __dirname,
+            'build',
+            'static',
+            'icons'
+          ),
+        },
+      ],
+    }),
     new HtmlWebpackPlugin({
       filename: '../views/404.hbs',
       template: path.resolve(__dirname, 'src', 'views', '404.handlebars'),
