@@ -8,6 +8,7 @@ import sunset from '../Icons/sunset.svg';
 import mappin from '../Icons/map-pin.svg';
 import wind from '../Icons/wind.svg';
 import droplet from '../Icons/droplet.svg';
+import getIcon from '../../../utils/weatherIcons';
 import Daily from './Daily';
 
 const Main = ({ city, country, current, daily }) => {
@@ -20,6 +21,7 @@ const Main = ({ city, country, current, daily }) => {
     temp,
     wind_speed,
   } = current;
+
   const { hrs, mins } = getSunHoursDuration(current.sunset, current.sunrise);
 
   return (
@@ -43,7 +45,7 @@ const Main = ({ city, country, current, daily }) => {
                   className='d-flex flex-column justify-content-around align-items-center'
                 >
                   <img
-                    src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+                    src={getIcon(icon)}
                     width={100}
                     height={100}
                   />

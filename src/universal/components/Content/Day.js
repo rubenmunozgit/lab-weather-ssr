@@ -2,6 +2,7 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import { Col } from 'react-bootstrap';
 import umbrela from '../Icons/umbrella.svg';
+import getIcon from '../../../utils/weatherIcons';
 
 const Day = ({ dt_local, temp, weather, pop }) => {
   const { icon, description } = weather[0];
@@ -16,7 +17,8 @@ const Day = ({ dt_local, temp, weather, pop }) => {
       >
         <h6>{dt_local}</h6>
         <img
-          src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+          className='p-3'
+          src={getIcon(icon)}
           alt={description}
           width={80}
           height={80}
