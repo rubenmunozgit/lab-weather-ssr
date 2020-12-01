@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import { Col } from 'react-bootstrap';
-import umbrela from '../Icons/umbrella.svg';
+import umbrela from '../../Icons/umbrella.svg';
 
 const Day = ({ dt_local, icon, temp, weather, pop }) => {
   const { description } = weather[0];
