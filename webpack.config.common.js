@@ -73,6 +73,13 @@ var commBrowserConfig = {
             'components',
             'Icons'
           ),
+          filter: async (resourcePath) => {
+            const filterSources = ['sunrise', 'sunset', 'umbrella', 'wind', 'map-pin', 'droplet'];
+            if (filterSources.some(value => resourcePath.includes(value))) {
+              return false;
+            }
+            return true
+          },
           to: path.join(
             __dirname,
             'build',
