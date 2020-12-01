@@ -11,17 +11,21 @@ const applicationHandler = async (req, res, next) => {
     if (error) {
       throw Error(JSON.stringify(error));
     }
-    const { current, daily } = await transformWeather({weather, geoInfo, locale});
+    const { current, daily } = await transformWeather({
+      weather,
+      geoInfo,
+      locale,
+    });
     const initialState = {
       sys: {
         ip: req.ip,
-        locale
+        locale,
       },
       geoInfo,
       weather: {
         current,
-        daily
-      }
+        daily,
+      },
     };
 
     const siteContext = { context: 'AppContext' };
