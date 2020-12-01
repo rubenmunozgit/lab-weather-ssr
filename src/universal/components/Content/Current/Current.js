@@ -9,10 +9,11 @@ import wind from '../../Icons/wind.svg';
 import droplet from '../../Icons/droplet.svg';
 
 const Current = ({ city, country, current }) => {
-  const { icon, description } = current.weather[0];
+  const { description } = current.weather[0];
   const {
     feels_like,
     humidity,
+    icon,
     sunset_local,
     sunrise_local,
     temp,
@@ -36,11 +37,7 @@ const Current = ({ city, country, current }) => {
             lg={6}
             className='d-flex flex-column justify-content-around align-items-center'
           >
-            <img
-              src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
-              width={100}
-              height={100}
-            />
+            <img src={`/static/icons/${icon}`} width={100} height={100} />
             <h4>
               <small className='text-muted'>{description}</small>
             </h4>
