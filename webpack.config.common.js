@@ -9,7 +9,7 @@ var commBrowserConfig = {
   entry: './src/universal/index.js',
   output: {
     path: path.join(__dirname, 'build', 'static'),
-    publicPath: 'static/'
+    publicPath: 'static/',
   },
   module: {
     rules: [
@@ -60,6 +60,34 @@ var commBrowserConfig = {
             'partials',
             'baseline.hbs'
           ),
+        },
+      ],
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(
+            __dirname,
+            'src',
+            'universal',
+            'components',
+            'Icons'
+          ),
+          filter: async (resourcePath) => {
+            const filterSources = [
+              'sunrise',
+              'sunset',
+              'umbrella',
+              'wind',
+              'map-pin',
+              'droplet',
+            ];
+            if (filterSources.some((value) => resourcePath.includes(value))) {
+              return false;
+            }
+            return true;
+          },
+          to: path.join(__dirname, 'build', 'static', 'icons'),
         },
       ],
     }),

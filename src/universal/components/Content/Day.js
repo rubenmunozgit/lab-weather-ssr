@@ -3,8 +3,8 @@ import Card from 'react-bootstrap/Card';
 import { Col } from 'react-bootstrap';
 import umbrela from '../Icons/umbrella.svg';
 
-const Day = ({ dt_local, temp, weather, pop }) => {
-  const { icon, description } = weather[0];
+const Day = ({ dt_local, icon, temp, weather, pop }) => {
+  const { description } = weather[0];
 
   return (
     temp.max &&
@@ -14,9 +14,10 @@ const Day = ({ dt_local, temp, weather, pop }) => {
         className='flex-row justify-content-between align-items-center flex-lg-column p-2'
         style={{ width: '100%' }}
       >
-        <h6>{dt_local}</h6>
+        <h6 style={{ minWidth: '15%' }}>{dt_local}</h6>
         <img
-          src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+          className='p-3'
+          src={`/static/icons/${icon}`}
           alt={description}
           width={80}
           height={80}

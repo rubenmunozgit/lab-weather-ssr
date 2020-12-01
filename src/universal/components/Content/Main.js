@@ -11,15 +11,17 @@ import droplet from '../Icons/droplet.svg';
 import Daily from './Daily';
 
 const Main = ({ city, country, current, daily }) => {
-  const { icon, description } = current.weather[0];
+  const { description } = current.weather[0];
   const {
     feels_like,
     humidity,
+    icon,
     sunset_local,
     sunrise_local,
     temp,
     wind_speed,
   } = current;
+
   const { hrs, mins } = getSunHoursDuration(current.sunset, current.sunrise);
 
   return (
@@ -43,7 +45,7 @@ const Main = ({ city, country, current, daily }) => {
                   className='d-flex flex-column justify-content-around align-items-center'
                 >
                   <img
-                    src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+                    src={`/static/icons/${icon}`}
                     width={100}
                     height={100}
                   />
