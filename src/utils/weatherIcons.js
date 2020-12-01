@@ -10,6 +10,6 @@ const iconMap = {
   '50': 'fog.svg',
 };
 
-const getIconSSR = (icon) => iconMap[icon.substr(0, 2)];
+const getIcon = (icon) => iconMap[icon.substr(0, 2)];
 
-export default getIconSSR;
+export default getIcon;
