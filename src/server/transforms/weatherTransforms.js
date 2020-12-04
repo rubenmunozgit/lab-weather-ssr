@@ -35,12 +35,12 @@ const transformDaily = ({ daily }, timeZone, locale) => {
   });
 };
 
-const transformWeather = async ({ weather, geoInfo, locale }) => {
+const transformWeather = async ({ weather, timeZone, locale }) => {
   const weatherMetrics = await transformK2C(weather);
 
   return {
-    current: await transformCurrent(weatherMetrics, geoInfo.timezone, locale),
-    daily: await transformDaily(weatherMetrics, geoInfo.timezone, locale),
+    current: await transformCurrent(weatherMetrics, timeZone, locale),
+    daily: await transformDaily(weatherMetrics, timeZone, locale),
   };
 };
 

@@ -13,7 +13,7 @@ const applicationHandler = async (req, res, next) => {
     }
     const { current, daily } = await transformWeather({
       weather,
-      geoInfo,
+      timeZone: geoInfo.timezone,
       locale,
     });
     const initialState = {
