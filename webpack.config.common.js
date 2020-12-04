@@ -75,12 +75,13 @@ var commBrowserConfig = {
           ),
           filter: async (resourcePath) => {
             const filterSources = [
+              'droplet',
+              'map-pin',
               'sunrise',
               'sunset',
+              'refresh-cw',
               'umbrella',
               'wind',
-              'map-pin',
-              'droplet',
             ];
             if (filterSources.some((value) => resourcePath.includes(value))) {
               return false;
