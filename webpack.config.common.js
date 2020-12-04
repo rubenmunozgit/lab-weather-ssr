@@ -13,10 +13,7 @@ var commBrowserConfig = {
   },
   module: {
     rules: [
-      { test: /\.(js)$/,
-        exclude: /node_modules/, 
-        use: 'babel-loader' 
-      },
+      { test: /\.(js)$/, exclude: /node_modules/, use: 'babel-loader' },
       {
         test: /\.svg$/,
         loader: 'url-loader',
@@ -104,7 +101,7 @@ var commBrowserConfig = {
       filename: '../views/main.hbs',
       template: path.resolve(__dirname, 'src', 'views', 'main.handlebars'),
       favicon: path.resolve(__dirname, 'src', 'favicons', 'favicon.ico'),
-      inject: false // loadadable/server does the inject
+      inject: false, // loadadable/server does the inject
     }),
     new LoadablePlugin(),
   ],

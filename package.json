@@ -8,7 +8,7 @@
     "build": "webpack --config=webpack.config.prod.js",
     "build:dev": "webpack  --config=webpack.config.dev.js --watch",
     "start": "npm run clean && NODE_ENV=production npm run build && node build/server.js",
-    "start:dev": "npm run clean && concurrently \"npm run build:dev\" \"nodemon --delay 2.5\" ",
+    "start:dev": "npm run clean && concurrently \"npm run build:dev\" \"nodemon --inspect --delay 2.5\" ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,16 +21,6 @@
     "url": "https://github.com/rubenmunozgit/lab-weather-ssr/issues"
   },
   "homepage": "https://github.com/rubenmunozgit/lab-weather-ssr#readme",
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ],
-    "plugins": [
-      "@babel/plugin-transform-runtime",
-      "@loadable/babel-plugin"
-    ]
-  },
   "dependencies": {
     "@loadable/component": "^5.14.1",
     "@loadable/server": "^5.14.0",
