@@ -38,7 +38,7 @@ const App = (props) => {
   return (
     <Fragment>
       <Header {...{ metric, handleSwitchChange }} />
-      <Main {...geoInfo} {...weatherData} refreshHandle={refreshHandle} />
+      <Main {...geoInfo} {...weatherData} {...{ metric, refreshHandle }} />
     </Fragment>
   );
 };

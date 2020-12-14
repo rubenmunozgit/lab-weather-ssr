@@ -9,7 +9,7 @@ import wind from '../Icons/wind.svg';
 import droplet from '../Icons/droplet.svg';
 import { getSunHoursDuration } from '../../../utils/date';
 
-const Current = ({ city, country, current, refreshHandle }) => {
+const Current = ({ city, country, current, metric, refreshHandle }) => {
   const { description } = current.weather[0];
   const {
     dt_local,
@@ -23,6 +23,7 @@ const Current = ({ city, country, current, refreshHandle }) => {
   } = current;
 
   const { hrs, mins } = getSunHoursDuration(current.sunset, current.sunrise);
+  const windMetrics = metric ? 'm/s' : 'mi/h';
 
   return (
     <Card className='mb-4'>
@@ -69,6 +70,7 @@ const Current = ({ city, country, current, refreshHandle }) => {
             <div className='d-flex align-items-center'>
               <div className='inline mr-2'>{wind_speed}</div>
               <img className='inline' src={wind} width={24} height={24} />
+              <div className='inline ml-2'>{windMetrics}</div>
             </div>
             <div className='d-flex align-items-center'>
               <img className='inline' src={droplet} width={24} height={24} />
