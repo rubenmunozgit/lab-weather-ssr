@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const getWeather = async ({ lat, lon, units = 'metric' }) => {
-  const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=${units}&
-    exclude=minutely,hourly&appid=7289e9613cb8f800099af227a5133275`;
+const getWeather = async ({ lat, lon, locale, metric }) => {
+  const units = metric ? 'metric' : 'imperial';
+  const url = `/refresh?lat=${lat}&lon=${lon}&locale=${locale}&units=${units}`;
   try {
     const { data } = await axios.get(url);
-    return { weather: data };
+    return data;
   } catch (error) {
     console.log(error.response.data);
     console.log(error.response.status);
