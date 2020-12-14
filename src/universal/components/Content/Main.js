@@ -4,12 +4,12 @@ import Current from './Current';
 import Daily from './Daily';
 import './Main.css';
 
-const Main = ({ city, country, current, daily, refreshHandle }) => {
+const Main = ({ city, country, current, daily, metric, refreshHandle }) => {
   return (
     <Container fluid='md' className='Main'>
       <Row className='justify-content-center'>
         <Col>
-          <Current {...{ city, country, current, refreshHandle }} />
+          <Current {...{ city, country, current, metric, refreshHandle }} />
         </Col>
       </Row>
       <Row className='justify-content-center'>
