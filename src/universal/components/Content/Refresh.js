@@ -1,8 +1,8 @@
 import React from 'react';
 import refreshIcon from '../Icons/refresh-cw.svg';
 
-const Refresh = ({ refreshHandle }) => {
-  return (
+const Refresh = ({ refreshHandle }) => (
+  <a href='#'>
     <img
       className='inline'
       src={refreshIcon}
@@ -10,7 +10,7 @@ const Refresh = ({ refreshHandle }) => {
       height={24}
       onClick={refreshHandle}
     />
-  );
-};
+  </a>
+);
 
 export default Refresh;

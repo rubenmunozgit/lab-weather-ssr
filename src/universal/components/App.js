@@ -23,7 +23,12 @@ const App = (props) => {
 
   const refreshHandle = async () => {
     const { lat, lon } = geoInfo;
-    const { weather: weaUpdate } = await getWeather({ lat, lon, locale });
+    const { weather: weaUpdate } = await getWeather({
+      lat,
+      lon,
+      locale,
+      metric,
+    });
     SetWeather((weatherData) => (weatherData = weaUpdate));
   };
 

@@ -1,4 +1,3 @@
-import { transformK2C } from './metrics';
 import getIcon from '../../utils/weatherIcons';
 import { getShortDateFormated, getTimeFormated } from '../../utils/date';
 
@@ -35,13 +34,9 @@ const transformDaily = ({ daily }, timeZone, locale) => {
   });
 };
 
-const transformWeather = async ({ weather, timeZone, locale }) => {
-  const weatherMetrics = await transformK2C(weather);
-
-  return {
-    current: await transformCurrent(weatherMetrics, timeZone, locale),
-    daily: await transformDaily(weatherMetrics, timeZone, locale),
-  };
-};
+const transformWeather = async ({ weather, timeZone, locale }) => ({
+  current: await transformCurrent(weather, timeZone, locale),
+  daily: await transformDaily(weather, timeZone, locale),
+});
 
 export { transformWeather };

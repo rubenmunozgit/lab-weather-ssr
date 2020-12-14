@@ -12,6 +12,7 @@ import { getSunHoursDuration } from '../../../utils/date';
 const Current = ({ city, country, current, refreshHandle }) => {
   const { description } = current.weather[0];
   const {
+    dt_local,
     feels_like,
     humidity,
     icon,
@@ -93,6 +94,7 @@ const Current = ({ city, country, current, refreshHandle }) => {
           </Col>
         </Row>
       </Card.Body>
+      <Card.Footer className='text-muted'>Updated at: {dt_local}</Card.Footer>
     </Card>
   );
 };

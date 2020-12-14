@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-const getWeather = async ({ lat, lon, locale }) => {
-  const url = `/refresh?lat=${lat}&lon=${lon}&locale=${locale}`;
+const getWeather = async ({ lat, lon, locale, metric }) => {
+  const units = metric ? 'metric' : 'imperial';
+  const url = `/refresh?lat=${lat}&lon=${lon}&locale=${locale}&units=${units}`;
   try {
     const { data } = await axios.get(url);
     return data;
