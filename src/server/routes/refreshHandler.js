@@ -1,6 +1,6 @@
 import getWeather from '../serviceClient/weather';
 import { transformWeather } from '../transforms/weatherTransforms';
-const thertyminutes = 30 * 60;
+const thirtyminutes = 30 * 60;
 
 const refreshHandler = async (req, res, next) => {
   try {
@@ -18,7 +18,7 @@ const refreshHandler = async (req, res, next) => {
         daily,
       },
     };
-    res.set('Cache-Control', `public, max-age=${thertyminutes}`);
+    res.set('Cache-Control', `public, max-age=${thirtyminutes}`);
     res.send(refresh);
   } catch (error) {
     console.log('server: ' + error);
