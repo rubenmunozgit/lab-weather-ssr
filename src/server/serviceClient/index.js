@@ -1,27 +1,19 @@
-import getLocationByIp from './geoLocation';
-import getWeather from './weather';
-
-const extractLatLon = (coords = '') => {
-  const latLon = coords.split(',');
-  return {
-    lat: latLon[0],
-    lon: latLon[1],
-  };
-};
+import {
+  getLocationByIpWithCache,
+  getWeatherWithCache,
+} from '../middleware/cache';
 
 const getGeoWeather = async (ip) => {
   try {
-    const { geoInfo, geoError } = await getLocationByIp(ip);
-    if (geoError) {
-      return { error: geoError };
+    const { geoInfo, message } = await getLocationByIpWithCache(ip);
+    if (message) {
+      return { error: message };
     }
 
-    /* const { weather, weathError } = await getWeather(
-      extractLatLon(geoInfo.coords)
-    ); */
-    const { weather, weathError } = await getWeather(
-      { lat: geoInfo.lat, lon: geoInfo.lon }
-    );
+    const { weather, weathError } = await getWeatherWithCache({
+      lat: geoInfo.lat,
+      lon: geoInfo.lon,
+    });
     if (weathError) {
       return { error: weathError };
     }

@@ -11,7 +11,6 @@ const getWeather = async ({ lat, lon, units = 'metric' }) => {
     console.log(error.response.status);
     console.log(error.response.headers);
     return {
-      weather: {},
       weathError: {
         status: error.response.status,
         message: error.response.data.message,
