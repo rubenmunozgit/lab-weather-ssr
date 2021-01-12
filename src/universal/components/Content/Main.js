@@ -1,20 +1,21 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Current from './Current';
-import Daily from './Daily';
+import Forecast from './Forecast';
 import './Main.css';
 
-const Main = ({ city, country, current, daily, metric, refreshHandle }) => {
+const Main = (props) => {
+  const { daily, ...rest } = props;
   return (
     <Container fluid='md' className='Main'>
       <Row className='justify-content-center'>
         <Col>
-          <Current {...{ city, country, current, metric, refreshHandle }} />
+          <Current {...rest} />
         </Col>
       </Row>
       <Row className='justify-content-center'>
         <Col>
-          <Daily daily={daily} />
+          <Forecast daily={daily} />
         </Col>
       </Row>
     </Container>

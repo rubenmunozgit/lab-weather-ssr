@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import Day from './Day';
+import { Context } from '../Context';
 
-const Daily = ({ daily }) => {
+const Forecast = ({ daily }) => {
+  const { translationText } = useContext(Context);
   const cardsRendering = daily.map((day) => (
     <Day key={day.dt} {...{ ...day }} />
   ));
   return (
     <Card>
-      <Card.Header className='bg-success text-white'>Forecast</Card.Header>
+      <Card.Header className='bg-success text-white'>
+        {translationText.forecast}
+      </Card.Header>
       <Row>
         <Col className='col d-flex justify-content-between flex-column flex-sm-column flex-md-column flex-lg-row '>
           {cardsRendering}
@@ -19,4 +23,4 @@ const Daily = ({ daily }) => {
   );
 };
 
-export default Daily;
+export default Forecast;

@@ -31,12 +31,12 @@ const getLocationByIpWithCache = async (ip) => {
   return ipCache[ip]; // 173.84.194.82
 };
 
-const getWeatherWithCache = async ({ lat, lon }) => {
+const getWeatherWithCache = async ({ lat, lon, lang }) => {
   const now = new Date().getTime();
 
   const key = lat & lon;
   if (!weatherCache[key] || isCacheExpired(weatherCache[key], now)) {
-    const { weather, weathError } = await getWeather({ lat, lon });
+    const { weather, weathError } = await getWeather({ lat, lon, lang });
     if (weathError) {
       return { weathError };
     }

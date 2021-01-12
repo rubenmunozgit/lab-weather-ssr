@@ -4,22 +4,32 @@ import getGeoWeather from '../serviceClient';
 import { transformWeather } from '../transforms/weatherTransforms';
 import { renderToString } from 'react-dom/server';
 
+const getLang = (locale) => {
+  const lang = locale.split('-')[0];
+  return lang === 'zh' ? locale.toLowerCase().replace('-', '_') : lang;
+};
+
 const applicationHandler = async (req, res, next) => {
   try {
     const locale = req.acceptsLanguages()[0] || 'en-US';
-    const { geoInfo, weather, error } = await getGeoWeather(req.ip);
+    const lang = getLang(locale);
+
+    const { geoInfo, weather, error } = await getGeoWeather(req.ip, lang);
     if (error) {
       throw Error(JSON.stringify(error));
     }
+
     const { current, daily } = await transformWeather({
       weather,
       timeZone: geoInfo.timezone,
       locale,
     });
+
     const initialState = {
       sys: {
         ip: req.ip,
         locale,
+        lang,
       },
       geoInfo,
       weather: {
@@ -27,8 +37,6 @@ const applicationHandler = async (req, res, next) => {
         daily,
       },
     };
-
-    const siteContext = { context: 'AppContext' };
 
     const body = renderToString(<App initialState={initialState} />);
 
@@ -38,7 +46,6 @@ const applicationHandler = async (req, res, next) => {
       baseline: 'baseline',
       locale,
       initialState: JSON.stringify(initialState),
-      siteContext: JSON.stringify(siteContext),
     });
   } catch (error) {
     console.log('server: ' + error);
