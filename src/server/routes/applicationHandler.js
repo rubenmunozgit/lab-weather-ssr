@@ -7,6 +7,7 @@ import { renderToString } from 'react-dom/server';
 const applicationHandler = async (req, res, next) => {
   try {
     const locale = req.acceptsLanguages()[0] || 'en-US';
+    const lang = locale.split('-')[0];
     const { geoInfo, weather, error } = await getGeoWeather(req.ip);
     if (error) {
       throw Error(JSON.stringify(error));
@@ -20,6 +21,7 @@ const applicationHandler = async (req, res, next) => {
       sys: {
         ip: req.ip,
         locale,
+        lang,
       },
       geoInfo,
       weather: {
@@ -27,8 +29,6 @@ const applicationHandler = async (req, res, next) => {
         daily,
       },
     };
-
-    const siteContext = { context: 'AppContext' };
 
     const body = renderToString(<App initialState={initialState} />);
 
@@ -38,7 +38,6 @@ const applicationHandler = async (req, res, next) => {
       baseline: 'baseline',
       locale,
       initialState: JSON.stringify(initialState),
-      siteContext: JSON.stringify(siteContext),
     });
   } catch (error) {
     console.log('server: ' + error);

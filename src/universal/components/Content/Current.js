@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import Refresh from './Refresh';
@@ -8,8 +8,10 @@ import mappin from '../Icons/map-pin.svg';
 import wind from '../Icons/wind.svg';
 import droplet from '../Icons/droplet.svg';
 import { getSunHoursDuration } from '../../../utils/date';
+import { Context } from '../Context';
 
 const Current = ({ city, country, current, metric, refreshHandle }) => {
+  const { translationText } = useContext(Context);
   const { description } = current.weather[0];
   const {
     dt_local,
@@ -61,7 +63,7 @@ const Current = ({ city, country, current, metric, refreshHandle }) => {
           >
             <h3 className='display-3'>{temp}</h3>
             <h4>
-              <small className='text-muted'>Feels like: {feels_like}</small>
+              <small className='text-muted'>{`${translationText.feels_like}: ${feels_like}`}</small>
             </h4>
           </Col>
         </Row>
@@ -96,7 +98,7 @@ const Current = ({ city, country, current, metric, refreshHandle }) => {
           </Col>
         </Row>
       </Card.Body>
-      <Card.Footer className='text-muted'>Updated at: {dt_local}</Card.Footer>
+      <Card.Footer className='text-muted'>{`${translationText.updated}: ${dt_local}`}</Card.Footer>
     </Card>
   );
 };

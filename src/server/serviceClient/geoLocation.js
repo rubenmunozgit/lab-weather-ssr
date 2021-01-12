@@ -16,4 +16,4 @@ const getLocationByIp = async (ip) => {
     };
   }
 };
-export default getLocationByIp;
+export default getLocationByIp; //80.39.132.22 - 173.84.194.82

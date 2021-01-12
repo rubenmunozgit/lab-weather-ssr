@@ -1,15 +1,21 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import Main from './Content/Main';
 import Header from './Header/Header';
+import { Context } from './Context';
 import { transformC2F, transformF2C } from '../../server/transforms/metrics';
 import getWeather from '../serviceClient/weather';
+import { translations } from '../translations';
 
 const App = (props) => {
   const {
-    sys: { locale },
+    sys: { lang, locale },
     geoInfo,
     weather,
   } = props.initialState;
+
+  const context = {
+    translationText: translations[lang],
+  };
 
   const handleSwitchChange = (value) => {
     const metricValue = !value.target.checked;
@@ -36,10 +42,10 @@ const App = (props) => {
   const [weatherData, SetWeather] = useState(weather);
 
   return (
-    <Fragment>
+    <Context.Provider value={context}>
       <Header {...{ metric, handleSwitchChange }} />
       <Main {...geoInfo} {...weatherData} {...{ metric, refreshHandle }} />
-    </Fragment>
+    </Context.Provider>
   );
 };
 
