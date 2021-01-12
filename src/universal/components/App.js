@@ -14,7 +14,7 @@ const App = (props) => {
   } = props.initialState;
 
   const context = {
-    translationText: translations[lang],
+    translationText: translations[lang] || translations['en'],
   };
 
   const handleSwitchChange = (value) => {
@@ -32,6 +32,7 @@ const App = (props) => {
     const { weather: weaUpdate } = await getWeather({
       lat,
       lon,
+      lang,
       locale,
       metric,
     });
