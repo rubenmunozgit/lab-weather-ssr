@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Card from 'react-bootstrap/Card';
 import { Col } from 'react-bootstrap';
 import umbrela from '../Icons/umbrella.svg';
+import { Context } from '../Context';
 
 const Day = ({ dt_local, icon, temp, weather, pop }) => {
+  const { translationText } = useContext(Context);
   const { description } = weather[0];
 
   return (
@@ -30,8 +32,8 @@ const Day = ({ dt_local, icon, temp, weather, pop }) => {
             </Col>
           )}
           <Col className='d-flex flex-column align-items-lg-center px-lg-0 py-lg-2'>
-            <div className='d-inline ml-2 text-danger'>H: {temp.max}</div>
-            <div className='d-inline ml-2 text-primary'>L: {temp.min}</div>
+            <div className='d-inline ml-2 text-danger'>{`${translationText.hight}: ${temp.max}`}</div>
+            <div className='d-inline ml-2 text-primary'>{`${translationText.low}: ${temp.min}`}</div>
           </Col>
         </Card.Body>
       </Card>

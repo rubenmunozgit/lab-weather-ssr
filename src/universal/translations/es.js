@@ -7,4 +7,6 @@ export default {
   sunset: 'Puesta',
   sunHours: '{0} hrs de sol',
   forecast: 'Prediccion',
+  hight: 'Max',
+  low: 'Min',
 };

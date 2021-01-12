@@ -7,4 +7,6 @@ export default {
   sunset: 'Sunset',
   sunHours: '{0} hr of sun',
   forecast: 'Forecast',
+  hight: 'H',
+  low: 'L',
 };
