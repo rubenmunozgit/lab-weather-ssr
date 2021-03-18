@@ -1,18 +1,58 @@
-const errorHandler = (err, req, res, next) => {
-  let body = `
-      <h1>Sorry we'll be right back</h1>
-      <p>Something unexpected happened and we're fixing it.</p>
-    `;
+import React, { createContext, useContext } from 'react';
+import { renderToString } from 'react-dom/server';
+import { translations } from '../universal/translations';
+
+const Context = createContext();
+
+const getLang = (locale) => {
+  const lang = locale.split('-')[0];
+  return lang === 'zh' ? locale.toLowerCase().replace('-', '_') : lang;
+};
+
+const ErrorPage = (props) => {
+  const { translationText } = useContext(Context);
+  const error = props.error;
   if (process.env.NODE_ENV !== 'production') {
-    body = `
-        <h1>Error: ${err.message}</h1>
-        <code>${err.stack
-          .replace(/\n/g, '<br/>')
-          .replace(/\s{4}/g, '&nbsp;&nbsp;&nbsp;&nbsp;')}</code>
-      `;
+    return (
+      <>
+        <h1>Error: {error.message}</h1>
+        <code>{error.stack}</code>
+      </>
+    );
   }
+
+  return (
+    <>
+      <div className='jumbotron'>
+        <div className='container'>
+          <h1 className='jumbotron-heading'>{translationText.heading}</h1>
+          <p className='lead text-muted'>{translationText.subheading}</p>
+        </div>
+      </div>
+    </>
+  );
+};
+
+const errorHandler = (err, req, res, next) => {
+  const locale = req.acceptsLanguages()[0] || 'en-US';
+  const lang = getLang(locale);
+  const context = {
+    translationText:
+      translations[lang].errorText || translations['en'].errorText,
+  };
+
+  const body = renderToString(
+    <Context.Provider value={context}>
+      <ErrorPage error={err} />
+    </Context.Provider>
+  );
+
   res.status(500);
-  res.render('404', { layout: false, body });
+  res.render('404', {
+    layout: false,
+    baseline: 'baseline',
+    body,
+  });
 };
 
 export default errorHandler;
