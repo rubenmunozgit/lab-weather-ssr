@@ -1,13 +1,9 @@
 import React from 'react';
+import { renderToString } from 'react-dom/server';
 import App from '../../universal/components/App';
 import getGeoWeather from '../serviceClient';
 import { transformWeather } from '../transforms/weatherTransforms';
-import { renderToString } from 'react-dom/server';
-
-const getLang = (locale) => {
-  const lang = locale.split('-')[0];
-  return lang === 'zh' ? locale.toLowerCase().replace('-', '_') : lang;
-};
+import getLang from '../../utils/getLangByLocale';
 
 const applicationHandler = async (req, res, next) => {
   try {

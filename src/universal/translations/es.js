@@ -9,4 +9,8 @@ export default {
   forecast: 'Prediccion',
   hight: 'Max',
   low: 'Min',
+  errorText: {
+    heading: 'Perdón, pronto estaremos de vuelta',
+    subheading: 'Algo inexperado a ocurrido y estamos arreglándolo.',
+  },
 };
