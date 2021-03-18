@@ -9,4 +9,8 @@ export default {
   forecast: '预测',
   hight: '高',
   low: '低',
+  errorText: {
+    heading: '对不起，我们马上回来',
+    subheading: '发生了意外情况，我们正在修复它',
+  },
 };
