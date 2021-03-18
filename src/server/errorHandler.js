@@ -1,13 +1,9 @@
 import React, { createContext, useContext } from 'react';
 import { renderToString } from 'react-dom/server';
 import { translations } from '../universal/translations';
+import getLang from '../utils/getLangByLocale';
 
 const Context = createContext();
-
-const getLang = (locale) => {
-  const lang = locale.split('-')[0];
-  return lang === 'zh' ? locale.toLowerCase().replace('-', '_') : lang;
-};
 
 const ErrorPage = (props) => {
   const { translationText } = useContext(Context);
