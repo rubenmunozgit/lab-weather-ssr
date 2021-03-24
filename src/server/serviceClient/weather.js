@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const getWeather = async ({ lat, lon, lang, units = 'metric' }) => {
   const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=${units}&lang=${lang}&
-    exclude=minutely,hourly&appid=7289e9613cb8f800099af227a5133275`;
+    exclude=minutely,hourly&appid=${process.env.OPENWEATHER_KEY}`;
   try {
     const { data } = await axios.get(url);
     return { weather: data };
