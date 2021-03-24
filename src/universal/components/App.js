@@ -4,7 +4,7 @@ import Header from './Header/Header';
 import { Context } from './Context';
 import { transformC2F, transformF2C } from '../../server/transforms/metrics';
 import getWeather from '../serviceClient/weather';
-import { translations } from '../translations';
+import { translations } from '../../translations';
 
 const App = (props) => {
   const {

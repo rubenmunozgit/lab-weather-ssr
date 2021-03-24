@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from 'react';
 import { renderToString } from 'react-dom/server';
-import { translations } from '../universal/translations';
+import { translations } from '../translations';
 import getLang from '../utils/getLangByLocale';
 
 const Context = createContext();

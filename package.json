@@ -7,8 +7,8 @@
     "clean": "rm -rf build",
     "build": "webpack --config=webpack.config.prod.js",
     "build:dev": "webpack  --config=webpack.config.dev.js --watch",
-    "start": "npm run clean && NODE_ENV=production npm run build && node build/server.js",
-    "start:dev": "npm run clean && concurrently \"npm run build:dev\" \"nodemon --inspect --delay 2.5\" ",
+    "start": "npm run clean && npm run build && NODE_ENV=production OPENWEATHER_KEY='' node build/server.js",
+    "start:dev": "npm run clean && concurrently \"npm run build:dev\" \"nodemon -r dotenv/config --inspect --delay 2.5\" ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -40,6 +40,7 @@
     "concurrently": "^5.2.0",
     "copy-webpack-plugin": "^6.2.1",
     "css-loader": "^4.3.0",
+    "dotenv": "^8.2.0",
     "html-webpack-plugin": "^4.3.0",
     "mini-css-extract-plugin": "^0.12.0",
     "nodemon": "^2.0.4",
