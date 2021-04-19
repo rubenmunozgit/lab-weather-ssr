@@ -39,12 +39,16 @@ const App = (props) => {
     SetWeather((weatherData) => (weatherData = weaUpdate));
   };
 
+  const handleSearchSummit = async (searchTerm) => {
+    console.log(`search input: ${searchTerm}`);
+  };
+
   const [metric, setMetric] = useState(true);
   const [weatherData, SetWeather] = useState(weather);
 
   return (
     <Context.Provider value={context}>
-      <Header {...{ metric, handleSwitchChange }} />
+      <Header {...{ metric, handleSwitchChange, handleSearchSummit }} />
       <Main {...geoInfo} {...weatherData} {...{ metric, refreshHandle }} />
     </Context.Provider>
   );

@@ -2,8 +2,9 @@ import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
+import SearchForm from './SearchForm/SearchForm';
 
-const Header = ({metric, handleSwitchChange}) => {
+const Header = ({ metric, handleSwitchChange, handleSearchSummit }) => {
   const isChecked = !metric;
 
   return (
@@ -12,9 +13,11 @@ const Header = ({metric, handleSwitchChange}) => {
       <Navbar.Toggle aria-controls='responsive-navbar-nav' />
       <Navbar.Collapse id='responsive-navbar-nav'>
         <Nav className='mr-auto'>
-          <Nav.Item >
+          <Nav.Item>
             <Form>
-              <p className='text-white text-left d-inline-block mr-2 mb-0'>Cº</p>
+              <p className='text-white text-left d-inline-block mr-2 mb-0'>
+                Cº
+              </p>
               <Form.Check
                 inline
                 type='switch'
@@ -27,6 +30,7 @@ const Header = ({metric, handleSwitchChange}) => {
             </Form>
           </Nav.Item>
         </Nav>
+        <SearchForm {...{ handleSearchSummit }} />
       </Navbar.Collapse>
     </Navbar>
   );
