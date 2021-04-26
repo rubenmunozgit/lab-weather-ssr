@@ -9,6 +9,10 @@ export default {
   forecast: 'Prediccion',
   hight: 'Max',
   low: 'Min',
+  find: {
+    placeholder: 'Busca tu ciudad',
+    btnText: 'Buscar',
+  },
   errorText: {
     heading: 'Perdón, pronto estaremos de vuelta',
     subheading: 'Algo inexperado a ocurrido y estamos arreglándolo.',

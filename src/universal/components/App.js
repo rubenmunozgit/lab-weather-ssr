@@ -14,6 +14,7 @@ const App = (props) => {
   } = props.initialState;
 
   const context = {
+    lang,
     translationText: translations[lang] || translations['en'],
   };
 
@@ -39,12 +40,24 @@ const App = (props) => {
     SetWeather((weatherData) => (weatherData = weaUpdate));
   };
 
+  const handleSelectedLocation = async ({ lat, lon }) => {
+    console.log({ lat, lon });
+    const { weather: weaUpdate } = await getWeather({
+      lat,
+      lon,
+      lang,
+      locale,
+      metric,
+    });
+    SetWeather((weatherData) => (weatherData = weaUpdate));
+  };
+
   const [metric, setMetric] = useState(true);
   const [weatherData, SetWeather] = useState(weather);
 
   return (
     <Context.Provider value={context}>
-      <Header {...{ metric, handleSwitchChange }} />
+      <Header {...{ metric, handleSwitchChange, handleSelectedLocation }} />
       <Main {...geoInfo} {...weatherData} {...{ metric, refreshHandle }} />
     </Context.Provider>
   );
