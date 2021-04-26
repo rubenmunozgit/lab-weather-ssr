@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
 import SearchForm from './SearchForm/SearchForm';
 
-const Header = ({ metric, handleSwitchChange, handleSearchSummit }) => {
+const Header = ({ metric, handleSwitchChange, handleSelectedLocation }) => {
   const isChecked = !metric;
 
   return (
@@ -30,7 +30,7 @@ const Header = ({ metric, handleSwitchChange, handleSearchSummit }) => {
             </Form>
           </Nav.Item>
         </Nav>
-        <SearchForm {...{ handleSearchSummit }} />
+        <SearchForm {...{ handleSelectedLocation }} />
       </Navbar.Collapse>
     </Navbar>
   );

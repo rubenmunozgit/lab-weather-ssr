@@ -9,6 +9,10 @@ export default {
   forecast: 'Forecast',
   hight: 'H',
   low: 'L',
+  find: {
+    placeholder: 'Find your city',
+    btnText: 'Find',
+  },
   errorText: {
     heading: "Sorry we'll be right back",
     subheading: "Something unexpected happened and we're fixing it.",
