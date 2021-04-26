@@ -34,7 +34,7 @@ const AutoComplete = ({
   }
 
   return (
-    <Form.Group controlId='findCity' className='my-2 my-sm-0 mb-0'>
+    <Form.Group controlId='findCity' className='my-2 my-sm-0'>
       <FormControl
         as='select'
         custom
