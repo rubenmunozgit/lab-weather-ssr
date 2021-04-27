@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Button, Form, FormControl } from 'react-bootstrap';
+import { Button, Form, FormControl, Spinner } from 'react-bootstrap';
 import axios from 'axios';
 import { Context } from '../../Context';
 
@@ -7,31 +7,21 @@ const makeKey = ({ name, state, country }) => {
   return `${name}, ${state ? `${state}, ` : ''}${country}`;
 };
 
-const AutoComplete = ({
-  sugestions = [],
-  defaultValue = {},
-  handleSelected,
-}) => {
+const Select = ({ sugestions = [], defaultValue = {}, handleSelected }) => {
   const { key } = defaultValue;
-  const [selected, setSelected] = useState('');
+  const [selected, setSelected] = useState(key);
 
   useEffect(() => {
-    const findSugestion = sugestions.find(
-      (suggest) => suggest.key === selected
-    );
+    const findSelectedLocation =
+      sugestions.find((suggest) => suggest.key === selected) || false;
 
-    handleSelected(findSugestion);
+    handleSelected(findSelectedLocation);
   }, [selected]);
 
   const handleOnSelect = (evt) => {
     const { value } = evt.currentTarget;
-
     setSelected((selected) => (selected = value));
   };
-
-  if (!sugestions.length) {
-    return null;
-  }
 
   return (
     <Form.Group controlId='findCity' className='my-2 my-sm-0'>
@@ -56,10 +46,8 @@ const SearchForm = ({ handleSelectedLocation }) => {
   const { lang, translationText } = useContext(Context);
   const [input, setInput] = useState({});
   const [sugestions, setSugestions] = useState([]);
-
-  useEffect(() => {
-    sugestions[0] && handleSelectedLocation(sugestions[0]);
-  }, [sugestions]);
+  const [isLoading, setLoading] = useState(false);
+  const [hasData, setHasData] = useState(false);
 
   const handleInputChange = (evt) => {
     const { name, value } = evt.currentTarget;
@@ -70,6 +58,8 @@ const SearchForm = ({ handleSelectedLocation }) => {
   };
 
   const handleSearchSummit = async (search) => {
+    setHasData((hasData) => (hasData = false));
+    setLoading((isLoading) => (isLoading = true));
     const { data } = await axios.get(
       `http://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=7289e9613cb8f800099af227a5133275`
     );
@@ -82,7 +72,11 @@ const SearchForm = ({ handleSelectedLocation }) => {
       lat: sugestion.lat,
       lon: sugestion.lon,
     }));
+    setLoading((isLoading) => (isLoading = false));
     setSugestions((sugestions) => (sugestions = sugestionTransformed));
+    if (sugestionTransformed.length) {
+      setHasData((hasData) => (hasData = true));
+    }
   };
 
   const handleSelected = (selectedLocation) => {
@@ -104,11 +98,21 @@ const SearchForm = ({ handleSelectedLocation }) => {
           variant='success'
           onClick={() => handleSearchSummit(input.search)}
         >
-          {translationText.find.btnText}
+          {isLoading ? (
+            <Spinner animation='border' role='status' size='sm' />
+          ) : (
+            translationText.find.btnText
+          )}
         </Button>
-        <AutoComplete
-          {...{ sugestions, defaultValue: sugestions[0], handleSelected }}
-        />
+        {hasData && (
+          <Select
+            {...{
+              sugestions,
+              defaultValue: sugestions[0],
+              handleSelected,
+            }}
+          />
+        )}
       </Form>
     </>
   );
