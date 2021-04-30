@@ -3,10 +3,6 @@ import { Button, Form, FormControl, Spinner } from 'react-bootstrap';
 import axios from 'axios';
 import { Context } from '../../Context';
 
-const makeKey = ({ name, state, country }) => {
-  return `${name}, ${state ? `${state}, ` : ''}${country}`;
-};
-
 const Select = ({ sugestions = [], defaultValue = {}, handleSelected }) => {
   const { key } = defaultValue;
   const [selected, setSelected] = useState(key);
@@ -60,21 +56,11 @@ const SearchForm = ({ handleSelectedLocation }) => {
   const handleSearchSummit = async (search) => {
     setHasData((hasData) => (hasData = false));
     setLoading((isLoading) => (isLoading = true));
-    const { data } = await axios.get(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=7289e9613cb8f800099af227a5133275`
-    );
-    const sugestionTransformed = data.map((sugestion) => ({
-      key: makeKey(sugestion),
-      name: sugestion.name,
-      state: sugestion.state || '',
-      country: sugestion.country,
-      local_name: sugestion.local_names[lang] || sugestion.name,
-      lat: sugestion.lat,
-      lon: sugestion.lon,
-    }));
+    const { data } = await axios.get(`search?q=${search}&limit=5&lang=${lang}`);
+
     setLoading((isLoading) => (isLoading = false));
-    setSugestions((sugestions) => (sugestions = sugestionTransformed));
-    if (sugestionTransformed.length) {
+    setSugestions((sugestions) => (sugestions = data));
+    if (data.length) {
       setHasData((hasData) => (hasData = true));
     }
   };

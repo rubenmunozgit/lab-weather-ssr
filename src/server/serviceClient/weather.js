@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const getWeather = async ({ lat, lon, lang, units = 'metric' }) => {
+const getWeather = async ({ lat, lon, lang, units }) => {
   const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=${units}&lang=${lang}&
     exclude=minutely,hourly&appid=${process.env.OPENWEATHER_KEY}`;
   try {
