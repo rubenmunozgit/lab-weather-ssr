@@ -10,7 +10,14 @@ import droplet from '../Icons/droplet.svg';
 import { getSunHoursDuration } from '../../../utils/date';
 import { Context } from '../Context';
 
-const Current = ({ city, country, current, metric, refreshHandle }) => {
+const Current = ({
+  city,
+  country,
+  current,
+  metric,
+  refreshHandle,
+  regionName,
+}) => {
   const { translationText } = useContext(Context);
   const { description } = current.weather[0];
   const {
@@ -33,7 +40,7 @@ const Current = ({ city, country, current, metric, refreshHandle }) => {
         <div className='d-flex justify-content-start'>
           <img className='inline' src={mappin} width={24} height={24} />
           <div className='inline ml-2'>
-            {city}, {country}
+            {city}, {regionName ? `${regionName},` : ''} {country}
           </div>
         </div>
         <div className='d-flex justify-content-start'>

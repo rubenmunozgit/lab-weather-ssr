@@ -15,19 +15,29 @@ const applicationHandler = async (req, res, next) => {
       throw Error(JSON.stringify(error));
     }
 
+    const { city, country, lat, lon, regionName, ...ipGeoData } = geoInfo;
+    const { timezone } = weather;
+
     const { current, daily } = await transformWeather({
       weather,
-      timeZone: geoInfo.timezone,
+      timeZone: timezone,
       locale,
     });
 
     const initialState = {
+      geo: {
+        city,
+        country,
+        lat,
+        lon,
+        regionName,
+      },
+      ipGeoData,
       sys: {
         ip: req.ip,
         locale,
         lang,
       },
-      geoInfo,
       weather: {
         current,
         daily,
