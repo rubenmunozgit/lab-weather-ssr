@@ -9,7 +9,7 @@ import { translations } from '../../translations';
 const App = (props) => {
   const {
     sys: { lang, locale },
-    geoInfo,
+    geo,
     weather,
   } = props.initialState;
 
@@ -29,7 +29,7 @@ const App = (props) => {
   };
 
   const refreshHandle = async () => {
-    const { lat, lon } = geoInfo;
+    const { lat, lon } = geoData;
     const { weather: weaUpdate } = await getWeather({
       lat,
       lon,
@@ -40,8 +40,13 @@ const App = (props) => {
     SetWeather((weatherData) => (weatherData = weaUpdate));
   };
 
-  const handleSelectedLocation = async ({ lat, lon }) => {
-    console.log({ lat, lon });
+  const handleSelectedLocation = async ({
+    city,
+    country,
+    lat,
+    lon,
+    regionName,
+  }) => {
     const { weather: weaUpdate } = await getWeather({
       lat,
       lon,
@@ -49,16 +54,20 @@ const App = (props) => {
       locale,
       metric,
     });
+    setGeoData(
+      (geoData) => (geoData = { city, country, lat, lon, regionName })
+    );
     SetWeather((weatherData) => (weatherData = weaUpdate));
   };
 
   const [metric, setMetric] = useState(true);
+  const [geoData, setGeoData] = useState(geo);
   const [weatherData, SetWeather] = useState(weather);
 
   return (
     <Context.Provider value={context}>
       <Header {...{ metric, handleSwitchChange, handleSelectedLocation }} />
-      <Main {...geoInfo} {...weatherData} {...{ metric, refreshHandle }} />
+      <Main {...geoData} {...weatherData} {...{ metric, refreshHandle }} />
     </Context.Provider>
   );
 };

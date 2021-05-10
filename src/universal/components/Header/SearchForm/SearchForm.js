@@ -29,7 +29,7 @@ const Select = ({ sugestions = [], defaultValue = {}, handleSelected }) => {
       >
         {sugestions.map((suggest) => (
           <option key={suggest.key}>
-            {suggest.local_name}, {suggest.state && `${suggest.state}, `}
+            {suggest.city}, {suggest.regionName && `${suggest.regionName}, `}
             {suggest.country}
           </option>
         ))}

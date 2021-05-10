@@ -1,5 +1,6 @@
 import { getWeatherWithCache } from '../middleware/cache';
 import { transformWeather } from '../transforms/weatherTransforms';
+const thirtyminutes = 30 * 60;
 
 const refreshHandler = async (req, res, next) => {
   try {
@@ -25,6 +26,7 @@ const refreshHandler = async (req, res, next) => {
         daily,
       },
     };
+    res.set('Cache-Control', `public, max-age=${thirtyminutes}`);
     res.send(refresh);
   } catch (error) {
     console.log('server: ' + error);

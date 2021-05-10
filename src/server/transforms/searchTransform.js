@@ -4,12 +4,12 @@ const makeKey = ({ name, state, country }) =>
 const transformSearchedLocations = (suggestions, lang) => {
   return suggestions.map((sugestion) => ({
     key: makeKey(sugestion),
-    name: sugestion.name,
-    state: sugestion.state || '',
+    city: sugestion.local_names[lang] || sugestion.name,
     country: sugestion.country,
-    local_name: sugestion.local_names[lang] || sugestion.name,
     lat: sugestion.lat,
     lon: sugestion.lon,
+    name: sugestion.name,
+    regionName: sugestion.state || '',
   }));
 };
 
