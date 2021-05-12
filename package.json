@@ -7,7 +7,7 @@
     "clean": "rm -rf build",
     "build": "webpack --config=webpack.config.prod.js",
     "build:dev": "webpack  --config=webpack.config.dev.js --watch",
-    "start": "npm run clean && npm run build && NODE_ENV=production OPENWEATHER_KEY='7289e9613cb8f800099af227a5133275' node build/server.js",
+    "start": "npm run clean && npm run build && NODE_ENV=production OPENWEATHER_KEY='' node build/server.js",
     "start:dev": "npm run clean && concurrently \"npm run build:dev\" \"nodemon -r dotenv/config --inspect --delay 2.5\" ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
