@@ -2,8 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 const CopyPlugin = require('copy-webpack-plugin');
+const LoadablePlugin = require('@loadable/webpack-plugin');
 
 var commBrowserConfig = {
   entry: './src/universal/index.js',
@@ -101,7 +101,9 @@ var commBrowserConfig = {
       filename: '../views/main.hbs',
       template: path.resolve(__dirname, 'src', 'views', 'main.handlebars'),
       favicon: path.resolve(__dirname, 'src', 'favicons', 'favicon.ico'),
+      excludeChunks: ['main', 'vendor', 'runtime'], // loadadable/server does the inject
     }),
+    new LoadablePlugin(),
   ],
 };
 
@@ -118,6 +120,7 @@ var commServerConfig = {
     rules: [
       {
         test: /\.(js)$/,
+        exclude: /node_modules/,
         use: 'babel-loader',
       },
       {
