@@ -7,7 +7,7 @@
     "clean": "rm -rf build",
     "build": "webpack --config=webpack.config.prod.js",
     "build:dev": "webpack  --config=webpack.config.dev.js --watch",
-    "start": "npm run clean && npm run build && NODE_ENV=production OPENWEATHER_KEY='' node build/server.js",
+    "start": "npm run clean && npm run build && NODE_ENV=production OPENWEATHER_KEY='7289e9613cb8f800099af227a5133275' node build/server.js",
     "start:dev": "npm run clean && concurrently \"npm run build:dev\" \"nodemon -r dotenv/config --inspect --delay 2.5\" ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/rubenmunozgit/lab-weather-ssr#readme",
   "dependencies": {
+    "@loadable/component": "^5.15.0",
+    "@loadable/server": "^5.15.0",
     "axios": "^0.21.1",
     "compression": "^1.7.4",
     "express": "^4.17.1",
@@ -35,6 +37,8 @@
     "@babel/plugin-transform-runtime": "^7.10.5",
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
+    "@loadable/babel-plugin": "^5.13.2",
+    "@loadable/webpack-plugin": "^5.15.0",
     "babel-loader": "^8.1.0",
     "bootstrap": "^4.5.2",
     "concurrently": "^5.2.0",

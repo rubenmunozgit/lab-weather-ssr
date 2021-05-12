@@ -1,8 +1,14 @@
+import path from 'path';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
+import { ChunkExtractor } from '@loadable/server';
 import App from '../../universal/components/App';
 import getGeoWeather from '../serviceClient';
 import { transformWeather } from '../transforms/weatherTransforms';
+import {
+  buildScriptTags,
+  buildStyleTags,
+} from '../../utils/buildScriptStylesTags';
 import getLang from '../../utils/getLangByLocale';
 
 const applicationHandler = async (req, res, next) => {
@@ -44,13 +50,21 @@ const applicationHandler = async (req, res, next) => {
       },
     };
 
-    const body = renderToString(<App initialState={initialState} />);
+    const statsFile = path.resolve('build/static/loadable-stats.json');
+    const extractor = new ChunkExtractor({ statsFile });
+    const jsx = extractor.collectChunks(<App initialState={initialState} />);
+    const styleTags = buildStyleTags(extractor.getStyleTags());
+    const scriptTags = buildScriptTags(extractor.getScriptTags());
+
+    const body = renderToString(jsx);
 
     res.render('main', {
       layout: false,
       body,
       baseline: 'baseline',
       locale,
+      styleTags,
+      scriptTags,
       initialState: JSON.stringify(initialState),
     });
   } catch (error) {
