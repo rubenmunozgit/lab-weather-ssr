@@ -11,7 +11,7 @@ const Forecast = ({ daily }) => {
   ));
   return (
     <Card>
-      <Card.Header className='bg-success text-white'>
+      <Card.Header className='bg-success text-black'>
         {translationText.forecast}
       </Card.Header>
       <Row>
