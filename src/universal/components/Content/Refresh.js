@@ -9,6 +9,7 @@ const Refresh = ({ refreshHandle }) => (
       width={24}
       height={24}
       onClick={refreshHandle}
+      alt='update'
     />
   </a>
 );
