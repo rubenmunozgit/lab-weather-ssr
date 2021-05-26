@@ -9,7 +9,7 @@ const Header = ({ metric, handleSwitchChange, handleSelectedLocation }) => {
 
   return (
     <Navbar collapseOnSelect expand='md' bg='dark' variant='dark'>
-      <Navbar.Brand href='/'>WR</Navbar.Brand>
+      <Navbar.Brand href='/'>Tiempito</Navbar.Brand>
       <Navbar.Toggle aria-controls='responsive-navbar-nav' />
       <Navbar.Collapse id='responsive-navbar-nav'>
         <Nav className='mr-auto'>
