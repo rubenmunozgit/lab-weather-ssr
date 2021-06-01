@@ -14,6 +14,7 @@ The technolgy used for this project is:
   - react
   - handlebars
   - loadable/component
+
 ## Server-Side
 This project use `express.js` as server. 
 This server will handle the request from the users as follow:
@@ -21,6 +22,7 @@ This server will handle the request from the users as follow:
 - Based on that IP address, there is a call to the service `ip-api.com/json` where retrive geo loacation data based on that IP address, like `lat`and `long`, city, country
 - Then based in the `lat`and `long`, there is a call to the weather service `api.openweathermap.org` to retrive the weather information
 - Then the server sends back to the client the web page with the whole information.
+This project use the `@loadable/server` to code-spliting, diving the code between SSR and CSR. The code is download at CSR when the search input is populated.
 
 # Client-Side
 The client side use React.
@@ -34,6 +36,7 @@ To start developing in local or contribute, please clone or fork the repo `https
 1. run command `npm i`
 2. create a `.env` file in root folder and please the openweather key api: `OPENWEATHER_KEY = '*****'`
 3. run command `npm run start:dev` 
+
 ## Scripts
 Name              | Description
 ----------------- | --------------------------------------------
@@ -44,4 +47,16 @@ Name              | Description
 `start:dev`       | This task run the application in development mode. running concurently webpack and node server.
 `start:prod`      | Same as `start:dev` but as it was production mode.
 
+# Internationalitation
+The web app use the Browser language set by default to check the language and use the translated text to show in the web app.
+[how to set default language in chrome](https://support.google.com/chrome/answer/173424?co=GENIE.Platform%3DDesktop&hl=en). 
+
+If the Browser is not able to get the default language, then English will be the default language.
+
+Right now only support these languages:
+- English :us:
+- Spanish :es:
+- Chinese 🇨🇳
+
+If you would like to contribute, you are welcome! :wink:
 
