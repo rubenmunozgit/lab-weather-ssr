@@ -1,22 +1,24 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const {merge} = require('webpack-merge');
-const {commBrowserConfig, commServerConfig} = require('./webpack.config.common');
-
+const { merge } = require('webpack-merge');
+const {
+  commBrowserConfig,
+  commServerConfig,
+} = require('./webpack.config.common');
 
 var browserConfig = {
   mode: 'production',
   output: {
-    filename: '[name].[contenthash].bundle.js'
+    filename: '[name].[contenthash].bundle.js',
   },
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
-      }
-    ]
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+    ],
   },
   plugins: [new MiniCssExtractPlugin()],
   optimization: {
@@ -28,20 +30,24 @@ var browserConfig = {
       new OptimizeCssAssetsPlugin({
         cssProcessorPluginOptions: {
           preset: [
-            'default', 
+            'default',
             {
               discardComments: {
-                removeAll: true
-              }
-            }
+                removeAll: true,
+              },
+            },
           ],
-        }
-      })]
-  }
+        },
+      }),
+    ],
+  },
 };
 
 var serverConfig = {
-  mode: 'production'
+  mode: 'production',
 };
 
-module.exports = [merge(commBrowserConfig, browserConfig), merge(commServerConfig, serverConfig)];
+module.exports = [
+  merge(commBrowserConfig, browserConfig),
+  merge(commServerConfig, serverConfig),
+];

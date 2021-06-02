@@ -101,6 +101,13 @@ var commBrowserConfig = {
       filename: '../views/main.hbs',
       template: path.resolve(__dirname, 'src', 'views', 'main.handlebars'),
       favicon: path.resolve(__dirname, 'src', 'favicons', 'favicon.ico'),
+      inject: false,
+      meta: {
+        viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
+        despription:
+          'Tiempito is a React Weather Application, it is made using React Server-Side-Render (SSR) styling with React-Bootstrap.',
+        robots: 'index,follow',
+      },
       excludeChunks: ['main', 'vendor', 'runtime'], // loadadable/server does the inject
     }),
     new LoadablePlugin(),
