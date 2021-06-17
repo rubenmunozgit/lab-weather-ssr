@@ -13,11 +13,8 @@ const Day = ({ dt_local, icon, temp, weather, pop }) => {
     temp.max &&
     temp.min &&
     description && (
-      <Card
-        className='flex-row justify-content-between align-items-center flex-lg-column p-2'
-        style={{ width: '100%' }}
-      >
-        <h4 style={{ minWidth: '15%' }}>{dt_local}</h4>
+      <Card className='w-100 flex-row justify-content-around align-items-center flex-lg-column p-2'>
+        <h4 className='flex-grow-1'>{dt_local}</h4>
         <img
           className='p-3'
           src={`/static/icons/${icon}`}
@@ -25,9 +22,9 @@ const Day = ({ dt_local, icon, temp, weather, pop }) => {
           width={80}
           height={80}
         />
-        <Card.Body className='d-flex flex-lg-column justify-content-center px-0 py-2'>
+        <Card.Body className='flex-grow-2 d-flex flex-lg-column justify-content-around px-0 py-2'>
           {pop > 0 && (
-            <Col className='d-flex align-items-center px-lg-0 py-lg-2'>
+            <div className='d-flex align-items-center px-0 py-2'>
               <img
                 className='d-inline'
                 src={umbrela}
@@ -35,13 +32,13 @@ const Day = ({ dt_local, icon, temp, weather, pop }) => {
                 height={24}
                 alt='chance of rainning'
               />
-              <div className='d-inline ml-2'>{(pop * 100).toFixed(0)} %</div>
-            </Col>
+              <div className='d-inline ml-2'>{(pop * 100).toFixed(0)}%</div>
+            </div>
           )}
-          <Col className='d-flex flex-column align-items-lg-center px-lg-0 py-lg-2'>
+          <div className='d-flex flex-column align-items-lg-center px-lg-0 py-lg-2'>
             <div className='d-inline ml-2 max'>{`${translationText.hight}: ${temp.max}`}</div>
             <div className='d-inline ml-2 min'>{`${translationText.low}: ${temp.min}`}</div>
-          </Col>
+          </div>
         </Card.Body>
       </Card>
     )
