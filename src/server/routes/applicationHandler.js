@@ -56,11 +56,10 @@ const applicationHandler = async (req, res, next) => {
     const styleTags = buildStyleTags(extractor.getStyleTags());
     const scriptTags = buildScriptTags(extractor.getScriptTags());
 
-    const body = renderToString(jsx);
+    const html = renderToString(jsx);
 
-    res.render('main', {
-      layout: false,
-      body,
+    res.render('react', {
+      html,
       baseline: 'baseline',
       locale,
       styleTags,

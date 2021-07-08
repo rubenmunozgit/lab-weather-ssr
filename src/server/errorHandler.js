@@ -37,17 +37,18 @@ const errorHandler = (err, req, res, next) => {
       translations[lang].errorText || translations['en'].errorText,
   };
 
-  const body = renderToString(
+  const html = renderToString(
     <Context.Provider value={context}>
       <ErrorPage error={err} />
     </Context.Provider>
   );
 
   res.status(500);
-  res.render('404', {
-    layout: false,
+  res.render('react', {
     baseline: 'baseline',
-    body,
+    html,
+    initialState: JSON.stringify(''),
+    locale,
   });
 };
 

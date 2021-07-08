@@ -92,14 +92,17 @@ var commBrowserConfig = {
         },
       ],
     }),
-    new HtmlWebpackPlugin({
-      filename: '../views/404.hbs',
-      template: path.resolve(__dirname, 'src', 'views', '404.handlebars'),
-      excludeChunks: ['main'],
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'src', 'views'),
+          to: path.join(__dirname, 'build', 'views'),
+        },
+      ],
     }),
     new HtmlWebpackPlugin({
-      filename: '../views/main.hbs',
-      template: path.resolve(__dirname, 'src', 'views', 'main.handlebars'),
+      filename: '../views/layouts/main.hbs',
+      template: path.resolve(__dirname, 'src', 'views', 'layouts', 'main.hbs'),
       favicon: path.resolve(__dirname, 'src', 'favicons', 'favicon.ico'),
       inject: false,
       meta: {
