@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import Card from 'react-bootstrap/Card';
-import { Col } from 'react-bootstrap';
 import umbrela from '../Icons/umbrella.svg';
 import { Context } from '../Context';
 import './Day.css';

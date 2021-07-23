@@ -1,7 +1,5 @@
 import React from 'react';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import Form from 'react-bootstrap/Form';
+import { Navbar, Nav, Form } from 'react-bootstrap';
 import SearchForm from './SearchForm/SearchForm';
 
 const Header = ({ metric, handleSwitchChange, handleSelectedLocation }) => {

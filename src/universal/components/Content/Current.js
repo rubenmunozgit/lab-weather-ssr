@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import { Row, Col } from 'react-bootstrap';
-import Card from 'react-bootstrap/Card';
+import { Row, Col, Card } from 'react-bootstrap';
 import Refresh from './Refresh';
 import sunrise from '../Icons/sunrise.svg';
 import sunset from '../Icons/sunset.svg';
