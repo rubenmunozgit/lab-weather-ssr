@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import { Row, Col } from 'react-bootstrap';
-import Card from 'react-bootstrap/Card';
+import { Row, Col, Card } from 'react-bootstrap';
 import Day from './Day';
 import { Context } from '../Context';
 
