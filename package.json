@@ -42,7 +42,7 @@
     "@loadable/webpack-plugin": "^5.15.0",
     "ansi-regex": "^5.0.1",
     "babel-loader": "^8.1.0",
-    "bootstrap": "^4.5.2",
+    "bootstrap": "^5.0.0",
     "concurrently": "^5.2.0",
     "copy-webpack-plugin": "^6.2.1",
     "css-loader": "^6.8.1",
